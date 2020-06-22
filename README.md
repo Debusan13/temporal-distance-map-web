@@ -1,1 +1,1 @@
-### Temporal Distance Map Web Applicatio
+### Temporal Distance Map Web Application
