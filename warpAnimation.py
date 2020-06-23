@@ -62,12 +62,9 @@ image = io.imread(dir_path+'/geoImage.png')
 rows, cols = image.shape[0], image.shape[1]
 
 warp = open(dir_path+'/warpMesh.txt').read()
-importantPoints = open(dir_path+'/importantPoints.txt').read().split('\n')
+#importantPoints = open(dir_path+'/importantPoints.txt').read().split('\n')
 oneMinuteDistance = float(open(dir_path+'/minuteDistance.txt').read())
-if matchScale:
-    matchMeshScale = float(open(dir_path+'/matchMeshScale.txt').read())
-else:
-    matchMeshScale = 1
+matchMeshScale = 1
 
 #Splits the warp mesh data into old_x, old_y, new_x, new_y and finds distance
 groups = warp.split()
@@ -136,23 +133,23 @@ for frameNumber in framesToRender:
                     
                     color = image[unwarped_x][unwarped_y]
                     
-                    #Code we added to gets rid of city names and highway symbols
+                    #Code we added to gets rid of city names and highway symbols (should be reimplemmented if imPoints is implemented)
                     
-                    while ((color[0] < 170 and color[1] < 170 and color[2] < 170) or (color[0] < 140 and color[1] < 140 and color[2] > 150)
-                           or (color[0] > 200 and color[1] < 110 and color[2] < 110)):
-                        unwarped_x = (unwarped_x + random.randint(-3, 3))
-                        unwarped_y = unwarped_y + random.randint(-3, 3)
+                   # while ((color[0] < 190 and color[1] < 190 and color[2] < 1790) or (color[0] < 150 and color[1] < 150 and color[2] > 130)
+                          # or (color[0] > 180 and color[1] < 130 and color[2] < 130)):
+                       # unwarped_x = (unwarped_x + random.randint(-3, 3))
+                      #  unwarped_y = unwarped_y + random.randint(-3, 3)
+                       # 
+                      #  if(unwarped_x >= 1500):
+                       #     unwarped_x = 1499
+                      #  elif(unwarped_y >= 1500):
+                      #      unwarped_y = 1499
+                      #  elif(unwarped_x < 0):
+                     #       unwarped_x = 0
+                      #  elif(unwarped_y < 0):
+                     #       unwarped_y = 0
                         
-                        if(unwarped_x >= 1500):
-                            unwarped_x = 1499
-                        elif(unwarped_y >= 1500):
-                            unwarped_y = 1499
-                        elif(unwarped_x < 0):
-                            unwarped_x = 0
-                        elif(unwarped_y < 0):
-                            unwarped_y = 0
-                        
-                        color = image[unwarped_x][unwarped_y]
+                        #color = image[unwarped_x][unwarped_y]
                 
                     circleDist = (newDist*(1-progress)+curDist*progress)
                     if circleDist % ringDist < 0.002:
@@ -165,29 +162,30 @@ for frameNumber in framesToRender:
         rowsDone = rowsDone + 1
 
     #Writes important points(we do not have any anymore) onto the image
-    img = Image.fromarray(data)
+    #structure is Name, old_x, old_y\n - if ever implemented
+    #img = Image.fromarray(data)
         
-    txt = Image.new('RGBA', (2055, 2048), (255, 255, 255, 0))
-    fntSize = max(int(0.02*mapResolution), 10)
-    fnt = ImageFont.truetype(dir_path+'/Roboto/Roboto-Regular.ttf', fntSize)
-    draw = ImageDraw.Draw(img)
-    for place in importantPoints:
-        placeData = place.split(',')
-        if len(placeData) >= 3:
-            p = float(placeData[1])
-            o = float(placeData[2])
-            oldDist = interpFunctionOldDist(p, o)
-            normalized = l2norm(p-0.5, o-0.5)
-            curDist = dist(p, o, 0.5, 0.5)
-            mapDist = oldDist*(1-progress)+progress*curDist
-            mapDist = mapDist*(matchMeshScale*(1-progress)+progress)
-            unwarped_x = normalized[0]*mapDist+0.5
-            unwarped_y = normalized[1]*mapDist+0.5
-            labelX = unwarped_y * mapResolution
-            labelY = (1-unwarped_x) * mapResolution
-            draw.text((labelX, labelY), str(placeData[0]), font=fnt, fill=(0, 0, 0))
-    draw.text((0, mapResolution-fntSize), legendText, font=fnt, fill=(0, 0, 0))
+    #txt = Image.new('RGBA', (2055, 2048), (255, 255, 255, 0))
+    #fntSize = max(int(0.02*mapResolution), 10)
+    #fnt = ImageFont.truetype(dir_path+'/Roboto/Roboto-Regular.ttf', fntSize)
+    #draw = ImageDraw.Draw(img)
+    #for place in importantPoints:
+        #placeData = place.split(',')
+        #if len(placeData) >= 3:
+            #p = float(placeData[1])
+            #o = float(placeData[2])
+           # oldDist = interpFunctionOldDist(p, o)
+            #normalized = l2norm(p-0.5, o-0.5)
+           # curDist = dist(p, o, 0.5, 0.5)
+           # mapDist = oldDist*(1-progress)+progress*curDist
+           # mapDist = mapDist*(matchMeshScale*(1-progress)+progress)
+           # unwarped_x = normalized[0]*mapDist+0.5
+           # unwarped_y = normalized[1]*mapDist+0.5
+          #  labelX = unwarped_y * mapResolution
+          #  labelY = (1-unwarped_x) * mapResolution
+         #   draw.text((labelX, labelY), str(placeData[0]), font=fnt, fill=(0, 0, 0))
+   # draw.text((0, mapResolution-fntSize), legendText, font=fnt, fill=(0, 0, 0))
 
-    img.save(dir_path+'/Frames/map'+str(frameNumber)+'.png')
-    frameNumber = frameNumber + 1
-    frameCount = frameCount + 1
+   # img.save(dir_path+'/Frames/map'+str(frameNumber)+'.png')
+   # frameNumber = frameNumber + 1
+   # frameCount = frameCount + 1
