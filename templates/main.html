@@ -14,7 +14,7 @@
 
 
   <title>Temporal Distance Map</title>
-  <link rel = "icon" href =  "/static/layers-24px.svg"> 
+  <link rel="icon" href="/static/layers-24px.svg">
 </head>
 
 <body>
@@ -22,11 +22,7 @@
   <div class="collapse" id="navbarToggleExternalContent">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand">Temporal Distance Map</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link" href="https://github.com/Debusan13/temporal-distance-map-web">Github</a>
@@ -44,37 +40,38 @@
     </button>
   </nav>
 
-<!--Form Submission-->
-<div class="p-3">
-  <form method="POST">
-    <div class="form-group">
-      <label for="inputAPIKey">Bing Maps API Key</label>
-      <input type="text" class="form-control" name="apiKey">
-      <a href=https://www.bingmapsportal.com/ target="_blank"><small id="emailHelp" class="form-text text-muted">Create
-          one here.</small></a>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputLattitude">Lattitude</label>
-        <input type="text" class="form-control" name="lat">
+  <!--Form Submission-->
+  <div class="p-3">
+    <form method="POST">
+      <div class="form-group">
+        <label for="inputAPIKey">Bing Maps API Key</label>
+        <input type="text" class="form-control" name="apiKey">
+        <a href=https://www.bingmapsportal.com/ target="_blank"><small id="emailHelp"
+            class="form-text text-muted">Create
+            one here.</small></a>
       </div>
-      <div class="form-group col-md-6">
-        <label for="inputLongitude">Longitude</label>
-        <input type="text" class="form-control" name="long">
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputLattitude">Lattitude</label>
+          <input type="text" class="form-control" name="lat">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputLongitude">Longitude</label>
+          <input type="text" class="form-control" name="long">
+        </div>
       </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary" name="Preview">Preview</button>
-    <button type="submit" class = "btn btn-primary" name="Submit">Create Map</button>
-  </form>
-</div>
+      <button type="submit" class="btn btn-primary" name="Preview">Preview</button>
+      <button type="submit" class="btn btn-primary" name="Submit">Create Map</button>
+    </form>
+  </div>
 
-<!--Image Preview-->
-<div class="card mx-auto" style="width: 18rem;">
-  <img src={{map_preview_src}} class="card-img-top" alt="...">
-  <h3 class="card-title mx-auto">Map Preview</h5>
-</div>
+  <!--Image Preview-->
+  <div class="card mx-auto" style="width: 18rem;">
+    <img src={{map_preview_src}} class="card-img-top" alt="...">
+    <h3 class="card-title mx-auto">Map Preview</h5>
+  </div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
