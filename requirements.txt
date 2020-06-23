@@ -9,9 +9,9 @@ idna==2.9
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
-mkl_fft==1.0.15
-mkl_random==1.1.1
-mkl_service==2.3.0
+mkl-fft
+mkl-random
+mkl-service
 numpy==1.18.1
 olefile==0.46
 Pillow==7.1.2
