@@ -126,8 +126,8 @@ def do_thing(lat, long, key):
             ###################################################################################################
             #Find angle to each point and move based on minute distance/travel time
 
-            warpMesh = open("warpMesh.txt", "w") 
-            minuteDistance = open("minuteDistance.txt", "w")
+            warpMesh = open("/static/warpMesh.txt", "w") 
+            minuteDistance = open("/static/minuteDistance.txt", "w")
 
             for i in mesh:
                 distance = i[2] * OneMinuteDistance

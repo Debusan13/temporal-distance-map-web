@@ -58,12 +58,12 @@ legendText = "Contour Scale: "+str(int(convertedRings))+" "+unit
 #Gets direct path to file and gets a lot of txt files
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-image = io.imread(dir_path+'/geoImage.png')
+image = io.imread(dir_path+'/static/geoImage.png')
 rows, cols = image.shape[0], image.shape[1]
 
-warp = open(dir_path+'/warpMesh.txt').read()
+warp = open(dir_path+'/static/warpMesh.txt').read()
 #importantPoints = open(dir_path+'/importantPoints.txt').read().split('\n')
-oneMinuteDistance = float(open(dir_path+'/minuteDistance.txt').read())
+oneMinuteDistance = float(open(dir_path+'/static/minuteDistance.txt').read())
 matchMeshScale = 1
 
 #Splits the warp mesh data into old_x, old_y, new_x, new_y and finds distance
@@ -104,8 +104,8 @@ for frameNumber in framesToRender:
             curTime = datetime.now()
             secsLeft = (curTime-startTime).total_seconds()*(1-timeProgress)/timeProgress
             string = "{0:.2f}".format(timeProgress*100)+"%: Approximately "+"{0:.2f}".format(secsLeft)+" seconds remaining"
-            print(string)
-            with open('time.txt', 'w') as the_file:
+            #print(string)
+            with open('/static/time.txt', 'w') as the_file:
                 the_file.write(string)
         for j in range(0, mapResolution):
             #Finds color at old coordinates and shifts them to new
