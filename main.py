@@ -1,6 +1,10 @@
 import os
+import time
 from flask import Flask, render_template, request, url_for
+from rq import Queue
+from redis import Redis
 from MapLogic import do_thing, get_static_img
+from worker import work
 
 
 app = Flask(__name__)
@@ -34,14 +38,9 @@ def form_post():
             get_static_img(lat, long, key)
             do_thing(lat, long, key)
             preview_src = url_for('static', filename='geoImage.png')
-            with open("warpAnimation.py") as f:
-                code = compile(f.read(), "warpAnimation.py", 'exec')
-                exec(code)
-            print("success")
-            with open("makeAnimation.py") as f:
-                code = compile(f.read(), "makeAnimation.py", 'exec')
-                exec(code)
-            print("success")
+            queue_work()
+            
+            
 
 
     return render_template("main.html", map_preview_src = preview_src)
@@ -58,3 +57,24 @@ def add_header(response):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+def queue_work():
+    # Tell RQ what Redis connection to use
+    conn = Redis()
+    q = Queue(connection=conn)
+
+    job = q.enqueue(work)
+
+
+def get_progress (file):
+    x = True
+    while x:
+        with open(file, 'r') as f:
+            last_line = f_read.readlines()[-1]
+            prev_line = last_line
+            if (prev_line == last_line):
+                x = False
+            else:
+                time.sleep(1)
