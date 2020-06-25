@@ -1,6 +1,7 @@
+import os
 from flask import Flask, render_template, request, url_for
 from MapLogic import do_thing, get_static_img
-import os
+
 
 app = Flask(__name__)
 
@@ -32,12 +33,15 @@ def form_post():
 
             get_static_img(lat, long, key)
             do_thing(lat, long, key)
+            preview_src = url_for('static', filename='geoImage.png')
             with open("warpAnimation.py") as f:
                 code = compile(f.read(), "warpAnimation.py", 'exec')
                 exec(code)
+            print("success")
             with open("makeAnimation.py") as f:
                 code = compile(f.read(), "makeAnimation.py", 'exec')
                 exec(code)
+            print("success")
 
 
     return render_template("main.html", map_preview_src = preview_src)

@@ -5,6 +5,7 @@ Created on Mon Jun 15 10:58:06 2020
 @author: Eli Nacar
 """
 
+import os
 import numpy as np
 import requests
 import math 
@@ -126,8 +127,8 @@ def do_thing(lat, long, key):
             ###################################################################################################
             #Find angle to each point and move based on minute distance/travel time
 
-            warpMesh = open("/static/warpMesh.txt", "w") 
-            minuteDistance = open("/static/minuteDistance.txt", "w")
+            warpMesh = open("static/warpMesh.txt", "w") 
+            minuteDistance = open("static/minuteDistance.txt", "w")
 
             for i in mesh:
                 distance = i[2] * OneMinuteDistance

@@ -10,16 +10,11 @@ from datetime import datetime
 import sys
 
 #Inputs the map resolution, ring distance in minutes, frames to render (number), whether it matches scale, which frames to render
-mapResolution = int(sys.argv[1])
-ringMinutes = int(sys.argv[2])
-frames = int(sys.argv[3])
-matchScale = sys.argv[4] == "true"
-if sys.argv[5] == "all":
-    framesToRender = range(0, frames+1)
-elif sys.argv[5] == "first":
-    framesToRender = [0]
-elif sys.argv[5] == "last":
-    framesToRender = [frames]
+mapResolution = 2048
+ringMinutes = 15
+frames = 6
+matchScale = True
+framesToRender = range(0, frames+1)
 
 #distance formula
 def dist(x1,y1,x2,y2):
@@ -104,8 +99,8 @@ for frameNumber in framesToRender:
             curTime = datetime.now()
             secsLeft = (curTime-startTime).total_seconds()*(1-timeProgress)/timeProgress
             string = "{0:.2f}".format(timeProgress*100)+"%: Approximately "+"{0:.2f}".format(secsLeft)+" seconds remaining"
-            #print(string)
-            with open('/static/time.txt', 'w') as the_file:
+            print(string)
+            with open('static/time.txt', 'w') as the_file:
                 the_file.write(string)
         for j in range(0, mapResolution):
             #Finds color at old coordinates and shifts them to new
@@ -163,12 +158,12 @@ for frameNumber in framesToRender:
 
     #Writes important points(we do not have any anymore) onto the image
     #structure is Name, old_x, old_y\n - if ever implemented
-    #img = Image.fromarray(data)
-        
+    img = Image.fromarray(data)
+
     #txt = Image.new('RGBA', (2055, 2048), (255, 255, 255, 0))
     #fntSize = max(int(0.02*mapResolution), 10)
     #fnt = ImageFont.truetype(dir_path+'/Roboto/Roboto-Regular.ttf', fntSize)
-    #draw = ImageDraw.Draw(img)
+    draw = ImageDraw.Draw(img)
     #for place in importantPoints:
         #placeData = place.split(',')
         #if len(placeData) >= 3:
@@ -186,6 +181,6 @@ for frameNumber in framesToRender:
          #   draw.text((labelX, labelY), str(placeData[0]), font=fnt, fill=(0, 0, 0))
    # draw.text((0, mapResolution-fntSize), legendText, font=fnt, fill=(0, 0, 0))
 
-   # img.save(dir_path+'/Frames/map'+str(frameNumber)+'.png')
-   # frameNumber = frameNumber + 1
-   # frameCount = frameCount + 1
+    img.save(dir_path+'/static/Frames/map'+str(frameNumber)+'.png')
+    frameNumber = frameNumber + 1
+    frameCount = frameCount + 1
