@@ -76,6 +76,14 @@
   <br>
 
   <!--Loading Bar-->
+  <div class="mx-auto p-3">
+    <div class="progress mx-auto" style="width: 500px;">
+      <div class="progress-bar bg-info" id="time-bar" role="progressbar" style="width: 0%" aria-valuemin="0"
+        aria-valuemax="100"></div>
+      <div class="progress-bar bg-success" id="prog-bar" role="progressbar" style="width: 0%" aria-valuemin="0"
+        aria-valuemax="100"></div>
+    </div>
+  </div>
 
   <!--Video Preview-->
   <br>
@@ -86,17 +94,48 @@
   </div>
   <br>
 
-  <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script>
+  <!-- Optional JavaScript -->
+  <script>
+    var checker = '{{p}}';
+
+    function readTime() {
+      var str_to_parse, comp_str = "100", match_str;
+
+      do {
+        jQuery.get('static/time.txt', function (data) {
+          str_to_parse = data;
+        });
+        match_str = str_to_parse.split("%")
+        document.getElementById("time-bar").style.width = match_str[0];
+      } while (comp_str != match_str);
+    }
+
+    function readv_() {
+      var comp_str = "100", match_str;
+
+      do {
+        jQuery.get('static/v_progress.txt', function (data) {
+          match_str = data;
+        });
+        document.getElementById("prog-bar").style.width = match_str;
+      } while (comp_str != match_str);
+    }
+
+    if (checker == 1) {
+      readTime();
+      readv_();
+    }
+
+  </script>
+
 </body>
 
 </html>

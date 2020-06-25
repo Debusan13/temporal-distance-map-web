@@ -2,30 +2,19 @@ import os
 import time
 from flask import Flask, render_template, request, url_for
 from rq import Queue
-from redis import Redis
+import redis
 from MapLogic import do_thing, get_static_img
 from worker import work
 
 
 def queue_work():
     # Tell RQ what Redis connection to use
-    conn = Redis()
+    #conn = redis.from_url(os.environ.get("REDIS_URL")) #specified variable for heroku
+    conn = redis.Redis() #specified variable for running locally
     q = Queue(connection=conn, default_timeout=3600)
 
     job = q.enqueue(work)
     
-
-
-def get_progress (file):
-    x = True
-    while x:
-        with open(file, 'r') as f:
-            last_line = f_read.readlines()[-1]
-            prev_line = last_line
-            if (prev_line == last_line):
-                x = False
-            else:
-                time.sleep(1)
 
 app = Flask(__name__)
 
@@ -38,6 +27,7 @@ def home():
 def form_post():
     placeholder = "https://via.placeholder.com/2048"
     preview_src = placeholder
+    x = 1
 
     if request.method == "POST":
 
@@ -59,11 +49,13 @@ def form_post():
             do_thing(lat, long, key)
             preview_src = url_for('static', filename='geoImage.png')
             queue_work()
+            time.sleep(10)
+            x = 1
 
             
 
 
-    return render_template("main.html", map_preview_src = preview_src)
+    return render_template("main.html", map_preview_src = preview_src, p = x)
 
 @app.after_request
 def add_header(response):
