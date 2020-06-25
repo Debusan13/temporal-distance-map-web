@@ -7,6 +7,26 @@ from MapLogic import do_thing, get_static_img
 from worker import work
 
 
+def queue_work():
+    # Tell RQ what Redis connection to use
+    conn = Redis()
+    q = Queue(connection=conn, default_timeout=3600)
+
+    job = q.enqueue(work)
+    
+
+
+def get_progress (file):
+    x = True
+    while x:
+        with open(file, 'r') as f:
+            last_line = f_read.readlines()[-1]
+            prev_line = last_line
+            if (prev_line == last_line):
+                x = False
+            else:
+                time.sleep(1)
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -39,7 +59,7 @@ def form_post():
             do_thing(lat, long, key)
             preview_src = url_for('static', filename='geoImage.png')
             queue_work()
-            
+
             
 
 
@@ -58,23 +78,3 @@ def add_header(response):
 if __name__ == "__main__":
     app.run(debug=True)
 
-
-
-def queue_work():
-    # Tell RQ what Redis connection to use
-    conn = Redis()
-    q = Queue(connection=conn)
-
-    job = q.enqueue(work)
-
-
-def get_progress (file):
-    x = True
-    while x:
-        with open(file, 'r') as f:
-            last_line = f_read.readlines()[-1]
-            prev_line = last_line
-            if (prev_line == last_line):
-                x = False
-            else:
-                time.sleep(1)
