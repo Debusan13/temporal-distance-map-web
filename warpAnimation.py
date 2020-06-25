@@ -99,6 +99,7 @@ for frameNumber in framesToRender:
             curTime = datetime.now()
             secsLeft = (curTime-startTime).total_seconds()*(1-timeProgress)/timeProgress
             string = "{0:.2f}".format(timeProgress*100)+"%: Approximately "+"{0:.2f}".format(secsLeft)+" seconds remaining"
+            print(string)
             with open('static/time.txt', 'w') as the_file:
                 the_file.write(string)
         for j in range(0, mapResolution):
