@@ -9,8 +9,8 @@ from worker import work
 
 def queue_work():
     # Tell RQ what Redis connection to use
-    #conn = redis.from_url(os.environ.get("REDIS_URL")) #specified variable for heroku
-    conn = redis.Redis() #specified variable for running locally
+    conn = redis.from_url(os.environ.get("REDIS_URL")) #specified variable for heroku
+    #conn = redis.Redis() #specified variable for running locally
     q = Queue(connection=conn, default_timeout=3600)
 
     job = q.enqueue(work)
