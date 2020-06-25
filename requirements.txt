@@ -7,15 +7,18 @@ cloudpickle==1.4.1
 cryptography==2.9.2
 cycler==0.10.0
 cytoolz==0.10.1
+dask @ file:///tmp/build/80754af9/dask-core_1592842333140/work
 decorator==4.4.2
 Flask==1.1.2
 gunicorn==20.0.4
 idna==2.9
 imageio==2.8.0
+imageio-ffmpeg==0.4.2
 itsdangerous==1.1.0
 Jinja2==2.11.2
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
+matplotlib @ file:///opt/concourse/worker/volumes/live/34dd81d3-0a70-4e5e-5ad6-be36ca7e59f7/volume/matplotlib-base_1592846084794/work
 networkx==2.4
 numpy==1.18.1
 olefile==0.46
@@ -27,7 +30,9 @@ PySocks==1.7.1
 python-dateutil==2.8.1
 PyWavelets==1.1.1
 PyYAML==5.3.1
+redis==3.5.3
 requests==2.23.0
+rq==1.4.2
 scikit-image==0.16.2
 scipy==1.4.1
 six==1.15.0
