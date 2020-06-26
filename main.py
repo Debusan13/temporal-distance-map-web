@@ -4,28 +4,17 @@ from flask import Flask, render_template, request, url_for
 from rq import Queue
 import redis
 from MapLogic import do_thing, get_static_img
-from worker import work
-
-
-def queue_work():
-    # Tell RQ what Redis connection to use
-    conn = redis.from_url(os.environ.get("REDIS_URL")) #specified variable for heroku
-    #conn = redis.Redis() #specified variable for running locally
-    q = Queue(connection=conn, default_timeout=3600)
-
-    job = q.enqueue(work)
-    
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("main.html", map_preview_src = "https://via.placeholder.com/2048")
+    return render_template("main.html", map_preview_src = "https://via.placeholder.com/1024")
 
 
 @app.route("/", methods=['GET', 'POST'])
 def form_post():
-    placeholder = "https://via.placeholder.com/2048"
+    placeholder = "https://via.placeholder.com/1024"
     preview_src = placeholder
     x = 1
 
