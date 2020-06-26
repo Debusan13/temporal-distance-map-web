@@ -48,9 +48,12 @@ def form_post():
             get_static_img(lat, long, key)
             do_thing(lat, long, key)
             preview_src = url_for('static', filename='geoImage.png')
-            queue_work()
-            time.sleep(10)
-            x = 1
+            with open("warpAnimation.py") as f:
+                code = compile(f.read(), "warpAnimation.py", 'exec')
+                exec(code)
+            with open("makeAnimation.py") as f:
+                code = compile(f.read(), "makeAnimation.py", 'exec')
+                exec(code)
 
             
 
