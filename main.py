@@ -37,11 +37,9 @@ def form_post():
             with open("warpAnimation.py") as f:
                 code = compile(f.read(), "warpAnimation.py", 'exec')
                 exec(code)
-            print("success")
             with open("makeAnimation.py") as f:
                 code = compile(f.read(), "makeAnimation.py", 'exec')
                 exec(code)
-            print("success")
 
 
     return render_template("main.html", map_preview_src = preview_src)

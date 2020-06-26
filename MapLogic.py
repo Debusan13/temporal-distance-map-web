@@ -11,11 +11,11 @@ import requests
 import math 
 import json
 
-ZOOM = "11"
+ZOOM = "10"
 
 #gets static image of map
 def get_static_img(lat, long, key):
-    URL = "https://dev.virtualearth.net/REST/V1/Imagery/Map/Road/" + lat + "%2C" + long + "/" + ZOOM + "?mapSize=2048,2048&dpi=Large&format=png&key=" + key
+    URL = "https://dev.virtualearth.net/REST/V1/Imagery/Map/Road/" + lat + "%2C" + long + "/" + ZOOM + "?mapSize=1024,1024&dpi=Large&format=png&key=" + key
     r = requests.get(URL)
 
     if r.status_code == 200: #checks for succesful call
@@ -29,7 +29,7 @@ def get_static_img(lat, long, key):
 #does all the map logic
 def do_thing(lat, long, key):
     #gets image metadata
-    URL = "https://dev.virtualearth.net/REST/V1/Imagery/Map/Road/" + lat + "%2C" + long + "/" + ZOOM + "?mapSize=2048,2048&mapMetadata=1&o=json&key=" + key
+    URL = "https://dev.virtualearth.net/REST/V1/Imagery/Map/Road/" + lat + "%2C" + long + "/" + ZOOM + "?mapSize=1024,1024&mapMetadata=1&o=json&key=" + key
     response = requests.get(URL)
     if response.status_code == 200:
         #creates json object

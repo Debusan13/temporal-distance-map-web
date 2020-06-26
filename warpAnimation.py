@@ -10,7 +10,7 @@ from datetime import datetime
 import sys
 
 #Inputs the map resolution, ring distance in minutes, frames to render (number), whether it matches scale, which frames to render
-mapResolution = 2048
+mapResolution = 1024
 ringMinutes = 15
 frames = 6
 matchScale = True
