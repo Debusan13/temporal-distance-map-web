@@ -27,7 +27,7 @@ pyparsing==2.4.7
 PySocks==1.7.1
 python-dateutil==2.8.1
 PyWavelets==1.1.1
-PyYAML==5.3.1
+PyYAML==5.4
 redis==3.5.3
 requests==2.23.0
 rq==1.4.2
