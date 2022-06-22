@@ -18,7 +18,7 @@ Jinja2==2.11.2
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
 networkx==2.4
-numpy==1.18.1
+numpy==1.22.0
 olefile==0.46
 Pillow==7.1.2
 pycparser==2.20
